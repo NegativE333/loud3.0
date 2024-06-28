@@ -54,7 +54,7 @@ export default function SignIn() {
                             Email
                         </label>
                         <div className="flex">
-                            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-cyan-300/20 border rounded-e-0 border-cyan-300/50 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                                 <Mail />
                             </span>
                             <input 
@@ -73,7 +73,7 @@ export default function SignIn() {
                             Password
                         </label>
                         <div className="flex">
-                            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-cyan-300/20 border rounded-e-0 border-cyan-300/50 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                                 <Lock />
                             </span>
                             <input 
