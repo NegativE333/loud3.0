@@ -1,5 +1,6 @@
 import { Sidebar } from "./_components/sidebar";
 import { MobileBottomBar } from "./_components/mobile-bottom-bar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Props = {
     children: React.ReactNode;
@@ -16,9 +17,11 @@ const AuthorizedLayout = ({
             <div className="md:hidden w-full h-16 absolute bottom-0">
                 <MobileBottomBar />
             </div>
-            <div className="m-8">
-                {children}
-            </div>
+            <ScrollArea className="h-full w-full ml-12 pr-12">
+                <div className="m-4 md:m-6 lg:m-8">
+                    {children}
+                </div>
+            </ScrollArea>
         </div>
     )
 }
