@@ -1,5 +1,6 @@
 "use client";
 
+import { Separator } from "@/components/ui/separator";
 import { urlFor } from "@/lib/sanity";
 import { formatTime } from "@/lib/utils";
 import { useSong } from "@/store/use-song";
@@ -53,8 +54,11 @@ export const MusicPlayer = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-2 w-full relative">
+            <Separator 
+                className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-4 w-[90%]"
+            />
             <div
-                className="absolute top-[20%] left-[20%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
+                className="absolute top-[30%] left-[20%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
             >
                 <ChevronLeft 
                     className=""
@@ -62,7 +66,7 @@ export const MusicPlayer = () => {
                 />
             </div>
             <div
-                className="absolute top-[20%] right-[20%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
+                className="absolute top-[30%] right-[20%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
             >
                 <ChevronRight 
                     className=""
@@ -71,7 +75,7 @@ export const MusicPlayer = () => {
             </div>
             <div
                 onClick={togglePause}
-                className="relative group flex items-center justify-center"
+                className="relative group flex items-center justify-center shadow-xl"
             >
                 <Image
                     src={urlFor(song.cover).url()}

@@ -79,7 +79,7 @@ export default function SingUp() {
                             </span>
                             <input 
                                 type="email" 
-                                className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-900 p-2.5" 
+                                className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" 
                                 placeholder="abc@gmail.com" 
                                 onChange={(e) => setFormData((prev) => ({
                                     ...prev, email: e.target.value
@@ -106,18 +106,25 @@ export default function SingUp() {
                             />
                         </div>
                     </div>
-                    <Button disabled={isSubmitting}>
-                        {isSubmitting ? (
-                            <Loader2 className="animate-spin"/>
-                        ) : (
-                            <>
-                                Sign Up
-                            </>
-                        )}
-                    </Button>
+                    <div
+                        className="flex w-full items-center justify-center mt-2"
+                    >
+                        <Button
+                            className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-fit" 
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? (
+                                <Loader2 className="animate-spin"/>
+                            ) : (
+                                <>
+                                    Sign Up
+                                </>
+                            )}
+                        </Button>
+                    </div>
                 </form>
                 <div className="mt-6 text-sm text-center text-muted-foreground">
-                    Already have an account? <Link href="/sign-in" className="text-black underline">Login</Link>
+                    Already have an account? <Link href="/sign-in" className="text-black underline">Sign In</Link>
                 </div>
             </div>
         </div>

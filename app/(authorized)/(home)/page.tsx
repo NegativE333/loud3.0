@@ -27,6 +27,7 @@ export default async function Home() {
     <div>
         <SongsList 
           data={data}
+          title="Exclusive Tracks Selected for You by loud"
         />
     </div>
   );

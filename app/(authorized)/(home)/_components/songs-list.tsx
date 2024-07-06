@@ -11,10 +11,12 @@ const heading = Hind({subsets: ['latin'], weight: '500'});
 
 type Props = {
     data: songsData [];
+    title: string;
 }
 
 export const SongsList = ({
-    data
+    data,
+    title
 }: Props) => {
 
     const {setSongsList} = useSong();
@@ -26,11 +28,9 @@ export const SongsList = ({
     return(
         <div>
             <h1 
-                className={cn("text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white/60 inline-block text-transparent bg-clip-text", heading.className)}
+                className={cn("text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text", heading.className)}
             >
-                Exclusive Tracks Selected for You by  <span className="text-white/80">
-                    loud
-                </span>
+                {title}
             </h1>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-5 gap-8 mt-8 w-fit">
                 {data.map((d) => (

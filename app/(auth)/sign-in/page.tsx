@@ -86,15 +86,20 @@ export default function SignIn() {
                             />
                         </div>
                     </div>
-                    <Button disabled={isSubmitting}>
-                        {isSubmitting ? (
-                            <Loader2 className="animate-spin"/>
-                        ) : (
-                            <>
-                                Sign In
-                            </>
-                        )}
-                    </Button>
+                    <div className="flex w-full items-center justify-center mt-2">
+                        <Button 
+                            className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-fit"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? (
+                                <Loader2 className="animate-spin"/>
+                            ) : (
+                                <>
+                                    Sign In
+                                </>
+                            )}
+                        </Button>
+                    </div>
                 </form>
                 <div className="mt-6 text-sm text-center text-muted-foreground">
                     New to loud? <Link href="/sign-up" className="text-black underline">Sign Up</Link>

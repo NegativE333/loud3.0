@@ -1,4 +1,4 @@
-import { boolean, pgTable, varchar } from "drizzle-orm/pg-core";
+import { boolean, pgTable, varchar, PgArray, text } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
     id: varchar("id").primaryKey(),
@@ -8,4 +8,5 @@ export const user = pgTable("user", {
     verifyCode: varchar("verifycode").notNull(),
     verifyCodeExpire: varchar("verifycodeexpire").notNull(),
     isVerified: boolean("isverified").default(false),
-})
+    favoriteSongs: text("favourite").array()
+});
