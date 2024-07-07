@@ -1,6 +1,6 @@
 import { client } from "@/lib/sanity";
 import { songsData } from "@/lib/sanity-data-type";
-import { SongsList } from "./_components/songs-list";
+import { SongsList } from "../_components/songs-list";
 
 export const revalidate = 30;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { songsData } from "@/lib/sanity-data-type"
-import { SongCard } from "./song-card";
+import { SongCard } from "./song-card"; 
 import { Hind } from 'next/font/google';
 import { cn } from "@/lib/utils";
 import { useSong } from "@/store/use-song";
@@ -26,7 +26,7 @@ export const SongsList = ({
     }, [data, setSongsList]);
 
     return(
-        <div>
+        <div className="ml-0 lg:ml-8 mx-0">
             <h1 
                 className={cn("text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text", heading.className)}
             >

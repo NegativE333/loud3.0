@@ -1,4 +1,4 @@
-import { Music } from "lucide-react";
+import { Music, Music2 } from "lucide-react";
 
 type Props = {
     children: React.ReactNode;
@@ -9,7 +9,9 @@ const AuthLayout = ({
 }: Props) => {
     return (
         <div className="h-full bg-gradient-to-bl from-gray-900 to-cyan-200/90 relative flex items-center justify-center">
-            <Music className="absolute -z-0 w-40 h-40 text-gray-600"/>
+            <div className="absolute -z-0 animate-bounce">
+                <Music2 className="size-40 text-black"/>
+            </div>
             <span className="z-10 w-full">
                 {children}
             </span>

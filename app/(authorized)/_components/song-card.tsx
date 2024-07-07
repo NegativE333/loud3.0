@@ -111,6 +111,7 @@ export const SongCard = ({
                     width={130}
                     height={130}
                     className="rounded-sm group-hover:opacity-100 transition"
+                    unoptimized
                 />
                 <div className="absolute hidden group-hover:block bg-white p-1 rounded-full transition z-10 cursor-pointer">
                     {isPlaying ? (
@@ -155,7 +156,7 @@ export const SongCard = ({
                 <h1 className="truncate">
                     {data.title}
                 </h1>
-                <h2 className="text-xs">
+                <h2 className="text-xs truncate">
                     {data.artist}
                 </h2>
             </div>

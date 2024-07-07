@@ -4,7 +4,7 @@ import { getFavourites } from "@/actions/favourite";
 import { songsData } from "@/lib/sanity-data-type";
 import { useSession } from "next-auth/react";
 import { useEffect, useState, useTransition } from "react";
-import { SongsList } from "../../(home)/_components/songs-list";
+import { SongsList } from "../../_components/songs-list"; 
 import { Hind } from 'next/font/google';
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -27,7 +27,7 @@ export const Favourites = () => {
 
     if(!songs){
         return(
-            <div>
+            <div className="ml-8">
                 <h1 
                     className={cn("text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text", heading.className)}
                 >

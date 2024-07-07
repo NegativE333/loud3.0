@@ -61,7 +61,7 @@ export default function SingUp() {
                             </span>
                             <input 
                                 type="text" 
-                                className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                className="rounded-none rounded-e-lg bg-gray-50/95 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                 placeholder="abc" 
                                 onChange={(e) => setFormData((prev) => ({
                                     ...prev, name: e.target.value
@@ -79,7 +79,7 @@ export default function SingUp() {
                             </span>
                             <input 
                                 type="email" 
-                                className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" 
+                                className="rounded-none rounded-e-lg bg-gray-50/95 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" 
                                 placeholder="abc@gmail.com" 
                                 onChange={(e) => setFormData((prev) => ({
                                     ...prev, email: e.target.value
@@ -98,7 +98,7 @@ export default function SingUp() {
                             </span>
                             <input 
                                 type="password" 
-                                className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                className="rounded-none rounded-e-lg bg-gray-50/95 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                 placeholder="******" 
                                 onChange={(e) => setFormData((prev) => ({
                                     ...prev, password: e.target.value
