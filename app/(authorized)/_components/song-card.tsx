@@ -113,21 +113,21 @@ export const SongCard = ({
                     className="rounded-sm group-hover:opacity-100 transition"
                     unoptimized
                 />
-                <div className="absolute hidden group-hover:block bg-white p-1 rounded-full transition z-10 cursor-pointer">
+                <div className="absolute hidden md:group-hover:block bg-white p-1 rounded-full transition z-10 cursor-pointer">
                     {isPlaying ? (
                         <Pause className="size-7" />
                     ) : (
                         <Play className="size-7" />
                     )}
                 </div>
-                <h2 className="absolute bg-black/50 w-[91%] text-center text-[13px] py-1 rounded-b hidden group-hover:block transition rounded-sm h-[100%]">
+                <h2 className="absolute bg-black/50 w-[91%] text-center text-[13px] py-1 rounded-b hidden md:group-hover:block transition rounded-sm h-[100%]">
                     <div className="relative h-full">
                         <p className="absolute bottom-0 text-white text-center w-full">
                             {data.album}
                         </p>
                     </div>
                 </h2>
-                <div className={cn("absolute bottom-0 bg-black/80 p-2 rounded-full text-center text-xs text-white group-hover:hidden hidden transition", isPlaying && "block animate-bounce")}>
+                <div className={cn("absolute bottom-0 bg-black/80 p-2 rounded-full text-center text-xs text-white md:group-hover:hidden hidden transition", isPlaying && "block animate-bounce")}>
                     <Music2 />
                 </div>
                 <div

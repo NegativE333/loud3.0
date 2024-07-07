@@ -131,7 +131,7 @@ export const MusicPlayer = () => {
                     </div>
                 </div>
             </div>
-            <div className="h-full w-[97%] bg-white bg-opacity-95 rounded-full px-3 py-2 flex items-center z-20 mx-2 md:hidden">
+            <div className="h-full w-[97%] bg-white bg-opacity-95 rounded-full px-2 py-1 flex items-center z-20 mx-2 md:hidden">
                 <Image
                     src={urlFor(song.cover).url()}
                     height={45}
@@ -153,10 +153,17 @@ export const MusicPlayer = () => {
                             onClick={playPrevSong}
                             className="size-7"
                         />
-                        <Pause
-                            onClick={togglePause}
-                            className="size-7"
-                        />
+                        {isPlaying ? (
+                            <Pause
+                                onClick={togglePause}
+                                className="size-7"
+                            />
+                        ): (
+                            <Play 
+                                onClick={togglePause}
+                                className="size-7"
+                            />
+                        )}
                         <ChevronRight
                             onClick={playNextSong}
                             className="size-7"

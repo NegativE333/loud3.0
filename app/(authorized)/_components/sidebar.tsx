@@ -18,7 +18,7 @@ export const Sidebar = () => {
             <Separator
                 className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-2"
             />
-            <div className="mt-4 flex flex-col gap-3">
+            <div className="mt-4 flex flex-col items-start justify-start gap-1">
                 <SidebarOptions 
                     title="All Tracks"
                     path="/"
