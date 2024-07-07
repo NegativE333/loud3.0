@@ -7,7 +7,7 @@ export const Navbar = () => {
 
     return(
         <div className="w-full h-full bg-white/60 rounded-b-md flex items-center px-4">
-            <h1 className="font-semibold text-2xl">loud</h1>
+            <h1 className="font-semibold text-2xl text-gray-800/90">loud</h1>
             <div className="ml-auto">
                 <PlayListSheet>
                     <Menu />
