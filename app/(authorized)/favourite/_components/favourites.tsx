@@ -31,7 +31,7 @@ export const Favourites = () => {
                 <h1 
                     className={cn("text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text", heading.className)}
                 >
-                    Your favourites
+                    Favourites Tunes
                 </h1>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-5 gap-8 mt-8 w-fit">
                     <Skeleton 
@@ -52,7 +52,7 @@ export const Favourites = () => {
         <div>
             <SongsList 
                 data={songs}
-                title="Your favourites" 
+                title="Favourites Tunes" 
             />
         </div>
     );

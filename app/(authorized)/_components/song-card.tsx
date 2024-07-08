@@ -4,7 +4,7 @@ import { urlFor } from "@/lib/sanity";
 import { songsData } from "@/lib/sanity-data-type";
 import { cn } from "@/lib/utils";
 import { useSong } from "@/store/use-song";
-import { Loader2, Music2, Pause, Play, Star } from "lucide-react";
+import { AudioLines, Loader2, Music2, Pause, Play, Star } from "lucide-react";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
 import axios from "axios";
@@ -32,12 +32,14 @@ export const SongCard = ({
 
     useEffect(() => {
         const getFavourites = async () => {
+            setIsLoading(true);
             try {
                 const res = await axios.post("/api/get-favourites", { email: User?.user.email });
                 setUserFavourites(res.data.favoriteSongs || []);
             } catch (error) {
                 toast.error("Something went wrong while getting your favourites");
             }
+            setIsLoading(false);
         };
 
         if (User?.user.email) {
@@ -60,7 +62,6 @@ export const SongCard = ({
     };
 
     const handleFavourite = async () => {
-        setIsLoading(true);
         try {
             if (isFavourite) {
                 startTransaction(() => {
@@ -70,7 +71,11 @@ export const SongCard = ({
                             slug: data.currentSlug
                         })
                         .then((data) => {
-                            toast.success(data.message);
+                            toast.success(data.message, {
+                                position: "bottom-left",
+                                className: "bg-white/90 flex gap-2 w-fit left-[10%]",
+                                icon: <AudioLines className="size-5" />
+                            });
                         })
                     }
                 })
@@ -82,7 +87,11 @@ export const SongCard = ({
                             slug: data.currentSlug
                         })
                         .then((data) => {
-                            toast.success(data.message);
+                            toast.success(data.message, {
+                                position: "bottom-left",
+                                className: "bg-white/90 flex gap-2 w-fit left-[10%]",
+                                icon: <AudioLines className="size-5" />
+                            });
                         })
                     }
                 })
@@ -94,9 +103,8 @@ export const SongCard = ({
 
             setUserFavourites(updatedFavourites);
         } catch (error) {
-            toast.error("some");
+            toast.error("Something went wrong!");
         }
-        setIsLoading(false);
     }
 
     return (
@@ -135,18 +143,18 @@ export const SongCard = ({
                         e.stopPropagation();
                         handleFavourite();
                     }}
-                    className="absolute top-0.5 right-2 bg-cyan-900/80 p-0.5 rounded-full text-white cursor-pointer"
+                    className={cn("absolute top-0.5 right-2 bg-white/80 p-1 rounded-full text-white cursor-pointer", isFavourite && "bg-orange-400/80")}
                 >
                     {isLoading ? (
                         <>
                             <Loader2
-                                className="size-4 text-cyan-400/50 animate-spin"
+                                className="size-4 text-orange-400 animate-spin"
                             />
                         </>
                     ) : (
                         <>
-                            <Star
-                                className={cn("size-4 text-cyan-400/50", isFavourite && "fill-cyan-500")}
+                            <AudioLines
+                                className={cn("size-4 text-orange-400/80", isFavourite && "text-white")}
                             />
                         </>
                     )}

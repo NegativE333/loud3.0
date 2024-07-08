@@ -50,7 +50,7 @@ export const MusicPlayer = () => {
                 <Separator
                     className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-8 w-[90%]"
                 />
-                <div className="px-4">
+                <div className="px-4 leading-7">
                     Welcome <span className="text-cyan-900">{data?.user.name}</span>
                     <p>
                         Ready to discover some great music? Click one any music card to start your musical journey. Explore our playlists or find your favorite tracks. Enjoy the beats!

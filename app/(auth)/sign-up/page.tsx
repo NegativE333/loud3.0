@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { Loader2, Lock, Mail, User } from "lucide-react";
+import { AudioLines, Loader2, Lock, Mail, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -34,7 +34,11 @@ export default function SingUp() {
             }
         }
         catch (error) {
-            toast.error("Email already exists.");
+            toast.error("Email already exists.", {
+                position: "bottom-left",
+                className: "bg-white/90 flex items-center gap-2 w-fit left-[10%] text-red-600",
+                icon: <AudioLines className="size-5 text-red-400" />
+            });
         }
         setIsSubmitting(false);
     }
@@ -110,7 +114,7 @@ export default function SingUp() {
                         className="flex w-full items-center justify-center mt-2"
                     >
                         <Button
-                            className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-fit" 
+                            className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-20" 
                             disabled={isSubmitting}
                         >
                             {isSubmitting ? (

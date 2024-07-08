@@ -35,7 +35,7 @@ export const addToFavourite = async ({
 
     revalidatePath("/favourite");
 
-    return {message: "Added to favourites."};
+    return {message: "Added to Favourite Tunes"};
 }
 
 export const removeFromFavourite = async ({
@@ -62,7 +62,7 @@ export const removeFromFavourite = async ({
         
         revalidatePath("/favourite");
 
-        return {message: "Removed from favourites"};
+        return {message: "Removed from Favourite Tunes"};
 }
 
 type GetProps = {

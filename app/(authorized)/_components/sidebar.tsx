@@ -24,10 +24,6 @@ export const Sidebar = () => {
                     path="/"
                 />
                 <SidebarOptions 
-                    title="Your favourites"
-                    path="/favourite"
-                />
-                <SidebarOptions 
                     title="Throwback Tunes"
                     path="/throwbackTunes"
                 />
@@ -42,6 +38,10 @@ export const Sidebar = () => {
                 <SidebarOptions 
                     title="Love Ballads"
                     path="/loveballads"
+                />
+                <SidebarOptions 
+                    title="Favourite Tunes"
+                    path="/favourite"
                 />
             </div>
             {!isMd && (

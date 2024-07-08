@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Loader2, Lock, Mail } from "lucide-react";
+import { AudioLines, Loader2, Lock, Mail } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,7 +29,11 @@ export default function SignIn() {
         })
 
         if(result?.error){
-            toast("Incorrect email or password");
+            toast.error("Incorrect email or password", {
+                position: "bottom-left",
+                className: "bg-white/90 flex items-center gap-2 w-fit left-[10%] text-red-600",
+                icon: <AudioLines className="size-5 text-red-400" />
+            });
         }
         
         if(result?.url){
@@ -88,7 +92,7 @@ export default function SignIn() {
                     </div>
                     <div className="flex w-full items-center justify-center mt-2">
                         <Button 
-                            className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-fit"
+                            className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-20"
                             disabled={isSubmitting}
                         >
                             {isSubmitting ? (
