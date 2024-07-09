@@ -131,7 +131,7 @@ export const MusicPlayer = () => {
                     </div>
                 </div>
             </div>
-            <div className="h-full w-[97%] bg-white bg-opacity-95 rounded-full px-2 py-1 flex items-center z-20 mx-2 md:hidden">
+            <div className="h-full w-[97%] bg-white bg-opacity-95 rounded-full px-2 py-1 flex items-center z-20 mx-2 md:hidden select-none">
                 <Image
                     src={urlFor(song.cover).url()}
                     height={45}
@@ -139,7 +139,7 @@ export const MusicPlayer = () => {
                     alt="Song"
                     className="rounded-full animate-spin duration-[3000ms] transition"
                 />
-                <div className="ml-4 w-[50%]">
+                <div className="ml-4 w-[50%] select-none">
                     <p className="truncate font-semibold">
                         {song.title}
                     </p>

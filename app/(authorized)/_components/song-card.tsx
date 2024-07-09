@@ -4,14 +4,9 @@ import { urlFor } from "@/lib/sanity";
 import { songsData } from "@/lib/sanity-data-type";
 import { cn } from "@/lib/utils";
 import { useSong } from "@/store/use-song";
-import { AudioLines, Loader2, Music2, Pause, Play, Star } from "lucide-react";
+import { Music2, Pause, Play } from "lucide-react";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
-import axios from "axios";
-import { useSession } from "next-auth/react";
-import { toast } from "sonner";
-import { useEffect, useState, useTransition } from "react";
-import { addToFavourite, removeFromFavourite } from "@/actions/favourite";
 
 const title = Poppins({ subsets: ['latin'], weight: ['500'] });
 
@@ -24,32 +19,6 @@ export const SongCard = ({
 }: Props) => {
 
     const { song, updateSong, pause, togglePause } = useSong();
-    const { data: User } = useSession();
-    const [userFavourites, setUserFavourites] = useState<string[]>([]);
-    const [isFavourite, setIsFavourite] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [pending, startTransaction] = useTransition();
-
-    useEffect(() => {
-        const getFavourites = async () => {
-            setIsLoading(true);
-            try {
-                const res = await axios.post("/api/get-favourites", { email: User?.user.email });
-                setUserFavourites(res.data.favoriteSongs || []);
-            } catch (error) {
-                toast.error("Something went wrong while getting your favourites");
-            }
-            setIsLoading(false);
-        };
-
-        if (User?.user.email) {
-            getFavourites();
-        }
-    }, [User?.user.email]);
-
-    useEffect(() => {
-        setIsFavourite(userFavourites.includes(data.currentSlug));
-    }, [data.currentSlug, userFavourites]);
 
     const isPlaying = song?.currentSlug === data.currentSlug && !pause;
 
@@ -60,52 +29,6 @@ export const SongCard = ({
             updateSong(data);
         }
     };
-
-    const handleFavourite = async () => {
-        try {
-            if (isFavourite) {
-                startTransaction(() => {
-                    if(User?.user.email){
-                        removeFromFavourite({
-                            email: User?.user.email, 
-                            slug: data.currentSlug
-                        })
-                        .then((data) => {
-                            toast.success(data.message, {
-                                position: "bottom-left",
-                                className: "bg-white/90 flex gap-2 w-fit left-[10%]",
-                                icon: <AudioLines className="size-5" />
-                            });
-                        })
-                    }
-                })
-            } else {
-                startTransaction(() => {
-                    if(User?.user.email){
-                        addToFavourite({
-                            email: User?.user.email, 
-                            slug: data.currentSlug
-                        })
-                        .then((data) => {
-                            toast.success(data.message, {
-                                position: "bottom-left",
-                                className: "bg-white/90 flex gap-2 w-fit left-[10%]",
-                                icon: <AudioLines className="size-5" />
-                            });
-                        })
-                    }
-                })
-            }
-
-            const updatedFavourites = isFavourite
-                ? userFavourites.filter(slug => slug !== data.currentSlug)
-                : [...userFavourites, data.currentSlug];
-
-            setUserFavourites(updatedFavourites);
-        } catch (error) {
-            toast.error("Something went wrong!");
-        }
-    }
 
     return (
         <div
@@ -137,27 +60,6 @@ export const SongCard = ({
                 </h2>
                 <div className={cn("absolute bottom-0 bg-black/80 p-2 rounded-full text-center text-xs text-white md:group-hover:hidden hidden transition", isPlaying && "block animate-bounce")}>
                     <Music2 />
-                </div>
-                <div
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleFavourite();
-                    }}
-                    className={cn("absolute top-0.5 right-2 bg-white/80 p-1 rounded-full text-white cursor-pointer", isFavourite && "bg-orange-400/80")}
-                >
-                    {isLoading ? (
-                        <>
-                            <Loader2
-                                className="size-4 text-orange-400 animate-spin"
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <AudioLines
-                                className={cn("size-4 text-orange-400/80", isFavourite && "text-white")}
-                            />
-                        </>
-                    )}
                 </div>
             </div>
             <div className={cn("flex flex-col text-sm w-full h-full text-center mt-1 capitalize gap-0.5 text-cyan-900/90", title.className)}>

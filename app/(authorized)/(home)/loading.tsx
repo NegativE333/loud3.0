@@ -11,7 +11,7 @@ const Loading = () => {
             <h1
                 className={cn("text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text", heading.className)}
             >
-                Party Starters
+                Exclusive Tracks Selected for You by loud
             </h1>
             <SkeletonLoading />
         </div>
