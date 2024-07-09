@@ -2,7 +2,7 @@
 
 import { Separator } from "@/components/ui/separator";
 import { urlFor } from "@/lib/sanity";
-import { formatTime } from "@/lib/utils";
+import { cn, formatTime } from "@/lib/utils";
 import { useSong } from "@/store/use-song";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -137,7 +137,7 @@ export const MusicPlayer = () => {
                     height={45}
                     width={45}
                     alt="Song"
-                    className="rounded-full animate-spin duration-[3000ms] transition"
+                    className={cn("rounded-full duration-[3000ms] transition", isPlaying && "animate-spin")}
                 />
                 <div className="ml-4 w-[50%] select-none">
                     <p className="truncate font-semibold">
