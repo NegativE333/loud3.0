@@ -77,7 +77,7 @@ export default function InputOTPForm ({
   }
 
   return (
-    <div className="w-[90%] sm:w-[70%] md:w-[50%] lg:w-[30%] bg-white bg-opacity-30 p-10 rounded-md shadow-md flex flex-col items-center justify-center gap-8">
+    <div className="w-[90%] sm:w-[70%] md:w-[50%] lg:w-[30%] bg-white bg-opacity-70 p-10 rounded-md shadow-md flex flex-col items-center justify-center gap-8">
         <Form {...form}>
             <h1 className="text-2xl text-gray-700 font-semibold">
                 Verify Email
@@ -132,7 +132,7 @@ export default function InputOTPForm ({
             <Button 
                 type="submit"
                 disabled={isValidating}
-                className=" bg-white bg-opacity-40 text-gray-800 hover:bg-opacity-50 hover:bg-white shadow-md"
+                className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-20"
             >
                 {isValidating ? (
                     <Loader2 className="animate-spin"/>

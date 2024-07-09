@@ -3,6 +3,7 @@
 import db from "@/db/drizzle";
 import { user } from "@/db/schema";
 import { client } from "@/lib/sanity";
+import redisClient from "@/redis/redis";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -32,7 +33,8 @@ export const addToFavourite = async ({
         .update(user)
         .set({ favoriteSongs: updatedFavorites })
         .where(eq(user.email, email));
-
+    
+    await redisClient.del(`FAVOURITE_TUNES:${email}`);
     revalidatePath("/favourite");
 
     return {message: "Added to Favourite Tunes"};
@@ -60,6 +62,7 @@ export const removeFromFavourite = async ({
             .set({ favoriteSongs: updatedFavorites })
             .where(eq(user.email, email));
         
+        await redisClient.del(`FAVOURITE_TUNES:${email}`);
         revalidatePath("/favourite");
 
         return {message: "Removed from Favourite Tunes"};
@@ -82,7 +85,7 @@ const getSongs = async (slugs: string[]) => {
     }`;
   
     const params = {slugs};
-  
+
     const data = await client.fetch(query, params);
     return data;
   }
