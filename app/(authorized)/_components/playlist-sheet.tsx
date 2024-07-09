@@ -45,12 +45,6 @@ export const PlayListSheet = ({
                     </SheetClose>
                     <SheetClose>
                         <SidebarOptions
-                            title="Your favourites"
-                            path="/favourite"
-                        />
-                    </SheetClose>
-                    <SheetClose>
-                        <SidebarOptions
                             title="Throwback Tunes"
                             path="/throwbackTunes"
                         />
@@ -71,6 +65,12 @@ export const PlayListSheet = ({
                         <SidebarOptions
                             title="Love Ballads"
                             path="/loveballads"
+                        />
+                    </SheetClose>
+                    <SheetClose>
+                        <SidebarOptions
+                            title="Your favourites"
+                            path="/favourite"
                         />
                     </SheetClose>
                 </div>
