@@ -7,16 +7,19 @@ import { useSong } from "@/store/use-song";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAudio } from 'react-use';
 import { Poppins } from "next/font/google";
+import { useExpand } from "@/store/use-expand";
 
 const title = Poppins({ subsets: ['latin'], weight: ['500'] });
 
 export const MusicPlayer = () => {
     const { song, pause, togglePause, playNextSong, playPrevSong } = useSong();
+    const {isExpanded, setExpanded} = useExpand();
     const { data } = useSession();
     const [audioUrl, setAudioUrl] = useState("/audio/coming_soon.mp3");
+    const progressBarRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (song?.audioLink) {
@@ -44,6 +47,15 @@ export const MusicPlayer = () => {
             audioControllers.play();
         }
     }, [pause, audioControllers]);
+
+    const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!progressBarRef.current) return;
+
+        const rect = progressBarRef.current.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const newTime = (clickX / rect.width) * state.duration;
+        audioControllers.seek(newTime);
+    };
 
     const isPlaying = !pause;
 
@@ -119,7 +131,11 @@ export const MusicPlayer = () => {
                         {song.artist}
                     </p>
                 </div>
-                <div className="relative w-[90%] h-1  rounded-full mt-1 mx-4">
+                <div
+                    ref={progressBarRef}
+                    className="relative w-[90%] h-1  rounded-full mt-1 mx-4 cursor-pointer hover:bg-muted-foreground transition"
+                    onClick={handleProgressClick}
+                >
                     <div
                         className="absolute top-0 left-0 h-full bg-cyan-900 rounded-full"
                         style={{ width: `${progress}%` }}
@@ -134,48 +150,68 @@ export const MusicPlayer = () => {
                     </div>
                 </div>
             </div>
-            <div className="h-full w-[97%] bg-white bg-opacity-95 rounded-full px-2 py-1 flex items-center z-20 mx-2 md:hidden select-none">
-                <Image
-                    src={urlFor(song.cover).url()}
-                    height={45}
-                    width={45}
-                    alt="Song"
-                    className={cn("rounded-full duration-[3000ms] transition", isPlaying && "animate-spin")}
-                />
-                <div className={cn("ml-3 w-[50%] select-none", title.className)}>
-                    <p className="truncate">
-                        {song.title}
-                    </p>
-                    <p className="truncate text-sm text-muted-foreground">
-                        {song.artist}
-                    </p>
+            <div 
+                className={cn("h-full w-[97%] bg-white bg-opacity-95 rounded-full px-2 py-1 z-20 mx-2 md:hidden select-none transition", isExpanded && "rounded-2xl h-[90px]")}
+                >
+                <div
+                    className="flex items-center"
+                >
+                    <Image
+                        onClick={setExpanded}
+                        src={urlFor(song.cover).url()}
+                        height={45}
+                        width={45}
+                        alt="Song"
+                        className={cn("rounded-full duration-[3000ms] transition", isPlaying && "animate-spin", isExpanded && "animate-none rounded-md")}
+                    />
+                    <div
+                        onClick={setExpanded}
+                        className={cn("ml-3 w-[50%] select-none", title.className)}
+                    >
+                        <p className="truncate">
+                            {song.title}
+                        </p>
+                        <p className="truncate text-sm text-muted-foreground">
+                            {song.artist}
+                        </p>
+                    </div>
+                    <div className="flex flex-col ml-auto">
+                        <div className="flex items-center justify-center gap-2 mt-1">
+                            <ChevronLeft
+                                onClick={playPrevSong}
+                                className="size-7 text-cyan-800/80"
+                            />
+                            {isPlaying ? (
+                                <Pause
+                                    onClick={togglePause}
+                                    className="size-7 outline-cyan-950 text-cyan-800/80"
+                                />
+                            ): (
+                                <Play 
+                                    onClick={togglePause}
+                                    className="size-7 outline-cyan-950 text-cyan-800/80"
+                                />
+                            )}
+                            <ChevronRight
+                                onClick={playNextSong}
+                                className="size-7 text-cyan-800/80"
+                            />
+                        </div>
+                        <div className="flex mx-auto gap-8 text-xs mt-2 w-[80%] text-muted-foreground">
+                            <p>{state && formatTime(state.time)}</p>
+                            <p>{state && formatTime(state.duration)}</p>
+                        </div>
+                    </div>
                 </div>
-                <div className="flex flex-col ml-auto">
-                    <div className="flex items-center justify-center gap-2 mt-1">
-                        <ChevronLeft
-                            onClick={playPrevSong}
-                            className="size-7 text-cyan-800/80"
-                        />
-                        {isPlaying ? (
-                            <Pause
-                                onClick={togglePause}
-                                className="size-7 outline-cyan-950 text-cyan-800/80"
-                            />
-                        ): (
-                            <Play 
-                                onClick={togglePause}
-                                className="size-7 outline-cyan-950 text-cyan-800/80"
-                            />
-                        )}
-                        <ChevronRight
-                            onClick={playNextSong}
-                            className="size-7 text-cyan-800/80"
-                        />
-                    </div>
-                    <div className="flex mx-auto gap-8 text-xs mt-2 w-[80%] text-muted-foreground">
-                        <p>{state && formatTime(state.time)}</p>
-                        <p>{state && formatTime(state.duration)}</p>
-                    </div>
+                <div
+                    ref={progressBarRef}
+                    className={cn("hidden w-[95%] h-1  rounded-full my-3 mx-2 cursor-pointer hover:bg-muted-foreground transition", isExpanded && "flex")}
+                    onClick={handleProgressClick}
+                >
+                    <div
+                        className="h-1 bg-cyan-900 rounded-full"
+                        style={{ width: `${progress}%` }}
+                    />
                 </div>
             </div>
             <div className="hidden">

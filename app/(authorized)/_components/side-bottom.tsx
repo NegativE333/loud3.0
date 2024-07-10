@@ -1,11 +1,15 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { MusicPlayer } from "./music-player";
 import { Sidebar } from "./sidebar";
 import { useMedia } from "use-media";
+import { useExpand } from "@/store/use-expand";
 
 export const SideBottom = () => {
     const isMd = useMedia({ maxWidth: "767px" });
+    const {isExpanded} = useExpand();
+
     return (
         <div>
             {!isMd && (
@@ -14,7 +18,7 @@ export const SideBottom = () => {
                 </div>
             )}
             {isMd && (
-                <div className="w-full h-16 absolute bottom-4 z-20">
+                <div className={cn("w-full h-16 absolute bottom-4 z-20", isExpanded && "bottom-8")}>
                     <MusicPlayer />
                 </div>
             )}

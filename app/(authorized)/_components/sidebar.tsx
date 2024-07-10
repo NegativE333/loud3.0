@@ -5,15 +5,19 @@ import { MusicPlayer } from "./music-player";
 import { UserActionsBtn } from "./user-actions-btn";
 import { SidebarOptions } from "./sidebar-options";
 import {useMedia} from 'use-media';
+import Link from "next/link";
 
 export const Sidebar = () => {
     const isMd = useMedia({ maxWidth: "767px" });
     return (
         <div className="h-[98%] w-80 bg-white bg-opacity-30 rounded-sm p-4 relative lg:fixed">
             <div className="flex items-center w-full">
-                <h1 className="text-3xl font-semibold text-gray-800/90">
+                <Link 
+                    href={"/"}
+                    className="text-3xl font-semibold text-gray-800/90"
+                >
                     loud
-                </h1>
+                </Link>
             </div>
             <Separator
                 className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-2"

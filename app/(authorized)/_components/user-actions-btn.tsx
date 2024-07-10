@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { LogOut, User } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
-
+import { useRouter } from "next/navigation"
 
 export const UserActionsBtn = () => {
     const { data } = useSession();
-
+    const router = useRouter();
     return (
         <div>
             <Separator
@@ -14,6 +14,7 @@ export const UserActionsBtn = () => {
             />
             <div className="flex gap-4 items-center">
                 <Button
+                    onClick={() => router.push("/profile")}
                     className="bg-white bg-opacity-40 text-gray-800 hover:bg-white hover:bg-opacity-60 hover:shadow-sm max-w-[55%]"
                 >
                     <User

@@ -11,6 +11,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { addToFavourite, removeFromFavourite } from "@/actions/favourite";
+import { useExpand } from "@/store/use-expand";
 
 const heading = Hind({ subsets: ['latin'], weight: '500' });
 
@@ -25,7 +26,8 @@ export const SongsList = ({
 }: Props) => {
 
     const { data: User } = useSession();
-    const { setSongsList } = useSong();
+    const { setSongsList, song } = useSong();
+    const { isExpanded } = useExpand();
 
     const [isLoading, setIsLoading] = useState(false);
     const [userFavourites, setUserFavourites] = useState<string[]>([]);
@@ -88,9 +90,7 @@ export const SongsList = ({
                 })
             }
 
-            const updatedFavourites = isFavourite
-                ? userFavourites.filter(s => s !== slug)
-                : [...userFavourites, slug];
+            const updatedFavourites = isFavourite ? userFavourites.filter(s => s !== slug) : [...userFavourites, slug];
 
             setUserFavourites(updatedFavourites);
         } catch (error) {
@@ -99,7 +99,7 @@ export const SongsList = ({
     }
 
     return (
-        <div className="lg:ml-8 pb-24 md:pb-0">
+        <div className={cn("lg:ml-8 pb-4 md:pb-0", song && "pb-24", isExpanded && "pb-28")}>
             <h1
                 className={cn("text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text select-none", heading.className)}
             >
