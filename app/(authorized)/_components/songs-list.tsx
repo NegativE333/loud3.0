@@ -64,8 +64,8 @@ export const SongsList = ({
                             .then((data) => {
                                 toast.success(data.message, {
                                     position: "bottom-left",
-                                    className: "bg-white/90 flex gap-2 w-fit left-[10%]",
-                                    icon: <AudioLines className="size-5" />
+                                    className: "md:bg-white/90 flex justify-center items-center gap-2 w-fit left-[10%]",
+                                    icon: <AudioLines className="size-4 md:size-5" />
                                 });
                             })
                     }
@@ -80,8 +80,8 @@ export const SongsList = ({
                             .then((data) => {
                                 toast.success(data.message, {
                                     position: "bottom-left",
-                                    className: "bg-white/90 flex gap-2 w-fit left-[10%]",
-                                    icon: <AudioLines className="size-5" />
+                                    className: "md:bg-white/90 flex justify-center items-center gap-2 w-fit left-[10%]",
+                                    icon: <AudioLines className="size-4 md:size-5" />
                                 });
                             })
                     }

@@ -28,7 +28,11 @@ export const config = {
         '/sign-up',
         '/verify',
         '/',
-        '/music',
-        '/profile'
+        '/throwbackTunes',
+        '/profile',
+        '/globalhits',
+        '/partystarters',
+        '/loveballads',
+        '/favourite',
     ],
 };

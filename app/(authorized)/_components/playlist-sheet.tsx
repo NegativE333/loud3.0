@@ -37,7 +37,7 @@ export const PlayListSheet = ({
                 </SheetHeader>
 
                 <div className="mt-4 flex flex-col items-start gap-3">
-                    <SheetClose>
+                    <SheetClose className="border-none outline-none focus:outline-none">
                         <SidebarOptions 
                             title="All Tracks" 
                             path="/" 
@@ -74,7 +74,7 @@ export const PlayListSheet = ({
                         />
                     </SheetClose>
                 </div>
-                <SheetFooter className="absolute bottom-4 w-[85%]">
+                <SheetFooter className="w-full flex items-center justify-center h-full pb-10">
                     <UserActionsBtn />
                 </SheetFooter>
             </SheetContent>

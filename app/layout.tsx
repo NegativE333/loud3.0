@@ -6,6 +6,12 @@ import { Toaster } from "sonner";
 export const metadata: Metadata = {
   title: "loud",
   description: "Feel loud",
+  icons: [
+    {
+      url: "logo.png",
+      href: "logo.png",
+    }
+  ]
 };
 
 export default function RootLayout({

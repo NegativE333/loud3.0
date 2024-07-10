@@ -9,6 +9,9 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useAudio } from 'react-use';
+import { Poppins } from "next/font/google";
+
+const title = Poppins({ subsets: ['latin'], weight: ['500'] });
 
 export const MusicPlayer = () => {
     const { song, pause, togglePause, playNextSong, playPrevSong } = useSong();
@@ -139,11 +142,11 @@ export const MusicPlayer = () => {
                     alt="Song"
                     className={cn("rounded-full duration-[3000ms] transition", isPlaying && "animate-spin")}
                 />
-                <div className="ml-4 w-[50%] select-none">
-                    <p className="truncate font-semibold">
+                <div className={cn("ml-3 w-[50%] select-none", title.className)}>
+                    <p className="truncate">
                         {song.title}
                     </p>
-                    <p className="truncate text-muted-foreground">
+                    <p className="truncate text-sm text-muted-foreground">
                         {song.artist}
                     </p>
                 </div>
@@ -151,25 +154,25 @@ export const MusicPlayer = () => {
                     <div className="flex items-center justify-center gap-2 mt-1">
                         <ChevronLeft
                             onClick={playPrevSong}
-                            className="size-7"
+                            className="size-7 text-cyan-800/80"
                         />
                         {isPlaying ? (
                             <Pause
                                 onClick={togglePause}
-                                className="size-7"
+                                className="size-7 outline-cyan-950 text-cyan-800/80"
                             />
                         ): (
                             <Play 
                                 onClick={togglePause}
-                                className="size-7"
+                                className="size-7 outline-cyan-950 text-cyan-800/80"
                             />
                         )}
                         <ChevronRight
                             onClick={playNextSong}
-                            className="size-7"
+                            className="size-7 text-cyan-800/80"
                         />
                     </div>
-                    <div className="flex mx-auto gap-8 text-xs mt-2 w-[80%]">
+                    <div className="flex mx-auto gap-8 text-xs mt-2 w-[80%] text-muted-foreground">
                         <p>{state && formatTime(state.time)}</p>
                         <p>{state && formatTime(state.duration)}</p>
                     </div>
