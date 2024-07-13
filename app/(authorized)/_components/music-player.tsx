@@ -19,7 +19,8 @@ export const MusicPlayer = () => {
     const { isExpanded, setExpanded } = useExpand();
     const { data } = useSession();
     const [audioUrl, setAudioUrl] = useState("/audio/coming_soon.mp3");
-    const progressBarRef = useRef<HTMLDivElement>(null);
+    const progressBarRef1 = useRef<HTMLDivElement>(null);
+    const progressBarRef2 = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (song?.audioLink) {
@@ -48,10 +49,19 @@ export const MusicPlayer = () => {
         }
     }, [pause, audioControllers]);
 
-    const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!progressBarRef.current) return;
+    const handleProgressClick1 = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!progressBarRef1.current) return;
 
-        const rect = progressBarRef.current.getBoundingClientRect();
+        const rect = progressBarRef1.current.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const newTime = (clickX / rect.width) * state.duration;
+        audioControllers.seek(newTime);
+    };
+
+    const handleProgressClick2 = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!progressBarRef2.current) return;
+
+        const rect = progressBarRef2.current.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
         const newTime = (clickX / rect.width) * state.duration;
         audioControllers.seek(newTime);
@@ -132,9 +142,9 @@ export const MusicPlayer = () => {
                     </p>
                 </div>
                 <div
-                    ref={progressBarRef}
-                    className="relative w-[90%] h-1  rounded-full mt-1 mx-4 cursor-pointer hover:bg-muted-foreground transition"
-                    onClick={handleProgressClick}
+                    ref={progressBarRef1}
+                    className="relative w-[90%] h-1  rounded-full mt-1 mx-4 cursor-pointer"
+                    onClick={handleProgressClick1}
                 >
                     <div
                         className="absolute top-0 left-0 h-full bg-cyan-900 rounded-full"
@@ -151,31 +161,34 @@ export const MusicPlayer = () => {
                 </div>
             </div>
             <div
-                className={cn("h-full w-[97%] bg-white bg-opacity-95 rounded-full px-1 py-1 z-20 mx-2 md:hidden select-none transition", isExpanded && "rounded-2xl h-[100px] px-3 py-2")}
+                className={cn("h-full w-[96%] bg-white bg-opacity-95 rounded-full px-1 py-1 z-20 mx-2 md:hidden select-none transition", isExpanded && "rounded-2xl h-[130px] px-3 py-2")}
             >
                 <div
-                    className="flex items-center"
+                    className={("flex items-center")}
                 >
                     <Image
                         onClick={setExpanded}
                         src={urlFor(song.cover).url()}
-                        height={50}
-                        width={50}
+                        height={isExpanded ? 55 : 50}
+                        width={isExpanded ? 55 : 50}
                         alt="Song"
                         className={cn("rounded-full duration-[3000ms] transition", isPlaying && "animate-spin", isExpanded && "animate-none rounded-md")}
                     />
                     <div
                         onClick={setExpanded}
-                        className={cn("ml-3 w-[50%] select-none flex flex-col gap-0.5", title.className)}
+                        className={cn("ml-3 w-[50%] select-none flex flex-col gap-0.5", title.className, isExpanded && "w-full")}
                     >
                         <p className="truncate text-sm">
                             {song.title}
                         </p>
-                        <p className="truncate text-xs text-muted-foreground">
+                        <p className={cn("hidden truncate text-xs text-muted-foreground transition", isExpanded && "flex")}>
+                            {song.album}
+                        </p>
+                        <p className="truncate text-xs text-muted-foreground/80">
                             {song.artist}
                         </p>
                     </div>
-                    <div className="flex items-center justify-center gap-2 ml-auto mb-0.5">
+                    <div className={cn("flex items-center justify-center gap-2 ml-auto", isExpanded && "hidden")}>
                         <ChevronLeft
                             onClick={playPrevSong}
                             className="size-7 text-cyan-800/80"
@@ -197,14 +210,23 @@ export const MusicPlayer = () => {
                         />
                     </div>
                 </div>
-                <div className={cn("hidden my-1.5 text-xs w-[97%] justify-between items-center text-muted-foreground pl-0.5", isExpanded && "flex")}>
+                <div className={cn("hidden mb-1.5 mt-3 text-xs w-full justify-between items-end text-muted-foreground pl-0.5", isExpanded && "flex")}>
                     <p>{formatTime(state.time)}</p>
+                    <div className="flex items-center gap-3 pb-3 text-cyan-800/80">
+                        <ChevronLeft onClick={playPrevSong} />
+                        {isPlaying ? (
+                            <Pause onClick={togglePause}/>
+                        ) : (
+                            <Play onClick={togglePause}/>
+                        )}
+                        <ChevronRight onClick={playNextSong}/>
+                    </div>
                     <p>{formatTime(state.duration)}</p>
                 </div>
                 <div
-                    ref={progressBarRef}
-                    className={cn("hidden w-[97%] h-1 rounded-full  cursor-pointer bg-muted-foreground/50 transition ml-0.5", isExpanded && "flex")}
-                    onClick={handleProgressClick}
+                    ref={progressBarRef2}
+                    className={cn("hidden h-1 rounded-full  cursor-pointer bg-muted-foreground/50 transition ml-0.5", isExpanded && "flex")}
+                    onClick={handleProgressClick2}
                 >
                     <div
                         className="h-1 bg-cyan-900 rounded-full"
