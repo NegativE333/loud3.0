@@ -1,8 +1,8 @@
 "use client";
 
-import { Menu } from "lucide-react";
 import { PlayListSheet } from "./playlist-sheet";
 import Link from "next/link";
+import { TbPlaylist } from 'react-icons/tb';
 
 export const Navbar = () => {
 
@@ -16,7 +16,7 @@ export const Navbar = () => {
             </Link>
             <div className="ml-auto">
                 <PlayListSheet>
-                    <Menu />
+                    <TbPlaylist className="text-2xl text-muted-foreground"/>
                 </PlayListSheet>
             </div>
         </div>
