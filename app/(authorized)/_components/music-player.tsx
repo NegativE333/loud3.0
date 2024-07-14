@@ -91,7 +91,7 @@ export const MusicPlayer = () => {
         <div>
             <div className="md:flex flex-col items-center justify-center gap-2 w-full relative hidden">
                 <Separator
-                    className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-4 w-[90%]"
+                    className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-2 w-[90%]"
                 />
                 <div
                     className="absolute top-[30%] left-[20%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
@@ -143,7 +143,7 @@ export const MusicPlayer = () => {
                 </div>
                 <div
                     ref={progressBarRef1}
-                    className="relative w-[90%] h-1  rounded-full mt-1 mx-4 cursor-pointer"
+                    className="relative w-[90%] h-1 hover:bg-muted-foreground rounded-full mt-1 mx-4 cursor-pointer"
                     onClick={handleProgressClick1}
                 >
                     <div

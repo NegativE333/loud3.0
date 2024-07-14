@@ -6,6 +6,7 @@ import { UserActionsBtn } from "./user-actions-btn";
 import { SidebarOptions } from "./sidebar-options";
 import {useMedia} from 'use-media';
 import Link from "next/link";
+import { SearchBar } from "./search-bar";
 
 export const Sidebar = () => {
     const isMd = useMedia({ maxWidth: "767px" });
@@ -22,7 +23,10 @@ export const Sidebar = () => {
             <Separator
                 className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-2"
             />
-            <div className="mt-4 flex flex-col items-start justify-start gap-1">
+            <div className="my-3">
+                <SearchBar />
+            </div>
+            <div className="flex flex-col items-start justify-start gap-1">
                 <SidebarOptions 
                     title="All Tracks"
                     path="/"
