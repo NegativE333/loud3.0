@@ -6,16 +6,26 @@ import Link from "next/link";
 import { TbPlaylist } from 'react-icons/tb';
 import { Search } from "lucide-react";
 import { SearchBar } from "./search-bar";
+import { useSearch } from "@/store/use-search";
+import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
+    const {setSearch, search} = useSearch();
+    const router = useRouter();
+
+    const handleClick = () => {
+        setSearch("");
+        router.push("/");
+    }
+    
     return(
         <div className="w-full h-full bg-white/90 rounded-b-md flex items-center px-6">
-            <Link 
-                href="/"
-                className="font-semibold text-2xl text-gray-800/90"
+            <div 
+                onClick={handleClick}
+                className="font-semibold text-2xl text-gray-800/90 select-none"
             >
                 loud
-            </Link>
+            </div>
             <div className="flex gap-3 items-center justify-center ml-auto">
                 <Popover>
                     <PopoverTrigger>
