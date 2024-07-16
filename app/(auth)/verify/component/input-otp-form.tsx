@@ -3,8 +3,11 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { Button } from "@/components/ui/button";
+import { Mulish } from "next/font/google";
+import { cn } from "@/lib/utils";
 
-import { Button } from "@/components/ui/button"
+const content = Mulish({subsets: ['latin']});
 
 import {
   Form,
@@ -12,14 +15,12 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
 import axios from "axios"
@@ -77,7 +78,7 @@ export default function InputOTPForm ({
   }
 
   return (
-    <div className="w-[90%] sm:w-[70%] md:w-[50%] lg:w-[30%] bg-white bg-opacity-70 p-10 rounded-md shadow-md flex flex-col items-center justify-center gap-8">
+    <div className={cn("w-[90%] sm:w-[70%] md:w-[50%] lg:w-[30%] p-10 rounded-md shadow-md flex flex-col items-center justify-center gap-8", content.className)}>
         <Form {...form}>
             <h1 className="text-2xl text-gray-700 font-semibold">
                 Verify Email
@@ -132,7 +133,7 @@ export default function InputOTPForm ({
             <Button 
                 type="submit"
                 disabled={isValidating}
-                className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-20"
+                className="text-muted-foreground w-20 bg-transparent hover:bg-transparent rounded-full border-muted-foreground border hover:text-black hover:border-black"
             >
                 {isValidating ? (
                     <Loader2 className="animate-spin"/>

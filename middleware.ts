@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
   const url = request.nextUrl;
 
-  const isAuthPage = url.pathname.startsWith('/sign-in') || url.pathname.startsWith('/sign-up') || url.pathname.startsWith('/verify');
+  const isAuthPage = url.pathname.startsWith('/sign-in') || url.pathname.startsWith('/sign-up') || url.pathname.startsWith('/verify') || url.pathname.startsWith('/landing');
   const isProtectedPage = !isAuthPage;
 
   if (token && isAuthPage) {
@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!token && isProtectedPage) {
-    return NextResponse.redirect(new URL('/sign-in', request.url));
+    return NextResponse.redirect(new URL('/landing', request.url));
   }
 
   return NextResponse.next();
@@ -34,5 +34,6 @@ export const config = {
         '/partystarters',
         '/loveballads',
         '/favourite',
+        '/landing'
     ],
 };

@@ -7,6 +7,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Mulish } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const content = Mulish({subsets: ['latin']});
 
 export default function SingUp() {
 
@@ -44,11 +48,8 @@ export default function SingUp() {
     }
 
     return (
-        <div className="flex items-center justify-center h-full">
-            <div className="w-[90%] sm:w-[70%] md:w-[50%] lg:w-[30%] bg-white bg-opacity-30 p-10 rounded-md shadow-md">
-                <h1 className="text-center text-3xl mb-6 text-gray-700">
-                    Be <b className="text-gray-800">loud</b>
-                </h1>
+        <div className={cn("flex items-center justify-center h-full animate-slidein opacity-0 [--slidein-delay:100ms]", content.className)}>
+            <div className="w-[90%] sm:w-[70%] md:w-[50%] lg:w-[30%] p-5 md:p-10 rounded-md shadow-md">
                 <form
                     onSubmit={handleSubmit}
                     className="flex flex-col gap-4"
@@ -114,7 +115,7 @@ export default function SingUp() {
                         className="flex w-full items-center justify-center mt-2"
                     >
                         <Button
-                            className="bg-white/30 shadow-sm hover:bg-white/50 text-black w-20" 
+                            className="text-muted-foreground w-20 bg-transparent hover:bg-transparent rounded-full border-muted-foreground border hover:text-black hover:border-black" 
                             disabled={isSubmitting}
                         >
                             {isSubmitting ? (

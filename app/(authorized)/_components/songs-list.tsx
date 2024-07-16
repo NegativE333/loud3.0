@@ -113,7 +113,7 @@ export const SongsList = ({
     return (
         <div className={cn("lg:ml-8 pb-4 md:pb-0", song && "pb-20", isExpanded && "pb-36")}>
             <h1
-                className={cn("text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text select-none", heading.className, search.length > 0 && "text-2xl")}
+                className={cn("text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text", heading.className, search.length > 0 && "text-2xl")}
             >
                 {search.length > 0 ? (
                     <p>

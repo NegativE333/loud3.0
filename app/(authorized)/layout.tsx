@@ -1,6 +1,4 @@
-import { Sidebar } from "./_components/sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MusicPlayer } from "./_components/music-player";
 import { SideBottom } from "./_components/side-bottom";
 import { Navbar } from "./_components/navbar";
 
@@ -12,7 +10,7 @@ const AuthorizedLayout = ({
     children
 }: Props) => {
     return(
-        <div className="h-full bg-gradient-to-bl from-gray-900 to-cyan-200/90 relative flex flex-col md:flex-row gap-4">
+        <div className="h-full bg-gradient-to-bl from-gray-900 to-cyan-200/90 relative flex flex-col md:flex-row gap-4 select-none">
             <SideBottom />
             <div className="md:hidden fixed w-full h-12 z-30">
                 <Navbar />

@@ -8,6 +8,10 @@ import { Search } from "lucide-react";
 import { SearchBar } from "./search-bar";
 import { useSearch } from "@/store/use-search";
 import { useRouter } from "next/navigation";
+import { Nunito } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const title = Nunito({ subsets: ["latin"] , weight : ['600']});
 
 export const Navbar = () => {
     const {setSearch, search} = useSearch();
@@ -22,7 +26,7 @@ export const Navbar = () => {
         <div className="w-full h-full bg-white/90 rounded-b-md flex items-center px-6">
             <div 
                 onClick={handleClick}
-                className="font-semibold text-2xl text-gray-800/90 select-none"
+                className={cn("font-bold text-3xl text-cyan-900", title.className)}
             >
                 loud
             </div>

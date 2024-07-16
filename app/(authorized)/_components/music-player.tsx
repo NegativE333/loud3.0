@@ -161,7 +161,7 @@ export const MusicPlayer = () => {
                 </div>
             </div>
             <div
-                className={cn("h-full w-[96%] bg-white bg-opacity-95 rounded-full px-1 py-1 z-20 mx-2 md:hidden select-none transition", isExpanded && "rounded-2xl h-[130px] px-3 py-2")}
+                className={cn("h-full w-[96%] bg-white bg-opacity-95 rounded-full px-1 py-1 z-20 mx-2 md:hidden transition", isExpanded && "rounded-2xl h-[130px] px-3 py-2")}
             >
                 <div
                     className={("flex items-center")}
@@ -176,7 +176,7 @@ export const MusicPlayer = () => {
                     />
                     <div
                         onClick={setExpanded}
-                        className={cn("ml-3 w-[50%] select-none flex flex-col gap-0.5", title.className, isExpanded && "w-full")}
+                        className={cn("ml-3 w-[50%] flex flex-col gap-0.5", title.className, isExpanded && "w-full")}
                     >
                         <p className="truncate text-sm">
                             {song.title}
