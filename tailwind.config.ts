@@ -85,6 +85,27 @@ const config = {
           '50%': { opacity: '1', transform: 'translateY(0)' },
           '100%': { opacity: '0', transform: 'translateY(80%)' },
         },
+        slideInFadeOut2: {
+          '0%' : { opacity: '0', transform: 'translateY(-0.5%)' },
+          '50%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(0.5%)' },
+        },
+        rotate: {
+          from : {
+            transform: "rotate(0deg)"
+          },
+          to: {
+            transform: "rotate(360deg)"
+          }
+        },
+        rotate2: {
+          from : {
+            transform: "rotate(0deg)"
+          },
+          to: {
+            transform: "rotate(0deg)"
+          }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -92,6 +113,10 @@ const config = {
         "slidein": "slidein 1s ease var(--slidein-delay, 0) forwards",
         "slideInFadeOut1": 'slideInFadeOut 10s ease infinite',
         "slideInFadeOut2": 'slideInFadeOut 10s ease infinite 5s',
+        "slideInFadeOut21": 'slideInFadeOut 6s ease infinite',
+        "slideInFadeOut22": 'slideInFadeOut 6s ease infinite 3s',
+        "rotate": "rotate 2s linear infinite",
+        "rotate2": "rotate2 2s linear infinite"
       },
     },
   },

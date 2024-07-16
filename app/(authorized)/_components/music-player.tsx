@@ -9,9 +9,10 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { useAudio } from 'react-use';
-import { Poppins } from "next/font/google";
+import { Manrope, Poppins } from "next/font/google";
 import { useExpand } from "@/store/use-expand";
 
+const subtitle = Manrope({ subsets: ["latin"] });
 const title = Poppins({ subsets: ['latin'], weight: ['500'] });
 
 export const MusicPlayer = () => {
@@ -21,6 +22,26 @@ export const MusicPlayer = () => {
     const [audioUrl, setAudioUrl] = useState("/audio/coming_soon.mp3");
     const progressBarRef1 = useRef<HTMLDivElement>(null);
     const progressBarRef2 = useRef<HTMLDivElement>(null);
+
+    const [show, setShow] = useState(false);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        console.log(isExpanded);
+        if (song && !isExpanded) {
+            timeoutRef.current = setTimeout(() => {
+                setShow(true);
+            }, 7000);
+        } else {
+            setShow(false);
+        }
+
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, [song, isExpanded]);
 
     useEffect(() => {
         if (song?.audioLink) {
@@ -71,30 +92,22 @@ export const MusicPlayer = () => {
 
     if (song === null) {
         return (
-            <div className="text-center font-semibold text-cyan-900/70 md:flex flex-col items-center justify-center hidden">
-                <Separator
-                    className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-8 w-[90%]"
-                />
-                <div className="px-4 leading-7">
-                    Welcome <span className="text-cyan-900">{data?.user.name}</span>
-                    <p>
-                        Ready to discover some great music? Click one any music card to start your musical journey. Explore our playlists or find your favorite tracks. Enjoy the beats!
-                    </p>
-                </div>
+            <div className="h-[15rem]">
+
             </div>
-        )
+        );
     }
 
     const progress = (state.time / state.duration) * 100 || 0;
 
     return (
         <div>
-            <div className="md:flex flex-col items-center justify-center gap-2 w-full relative hidden">
+            <div className="md:flex flex-col items-center justify-center gap-2 w-full relative hidden h-[15rem]">
                 <Separator
-                    className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-2 w-[90%]"
+                    className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-2"
                 />
                 <div
-                    className="absolute top-[30%] left-[20%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
+                    className="absolute top-[30%] left-[15%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
                 >
                     <ChevronLeft
                         className=""
@@ -102,7 +115,7 @@ export const MusicPlayer = () => {
                     />
                 </div>
                 <div
-                    className="absolute top-[30%] right-[20%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
+                    className="absolute top-[30%] right-[15%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
                 >
                     <ChevronRight
                         className=""
@@ -130,7 +143,7 @@ export const MusicPlayer = () => {
                         )}
                     </div>
                 </div>
-                <div className="flex flex-col items-center justify-center gap-0.5 text-center">
+                <div className={cn("flex flex-col items-center justify-center gap-0.5 text-center", subtitle.className)}>
                     <p className="font-semibold text-gray-900 truncate">
                         {song.title}
                     </p>
@@ -143,7 +156,7 @@ export const MusicPlayer = () => {
                 </div>
                 <div
                     ref={progressBarRef1}
-                    className="relative w-[90%] h-1 hover:bg-muted-foreground rounded-full mt-1 mx-4 cursor-pointer"
+                    className="relative w-full h-1 hover:bg-muted-foreground rounded-full mt-2 mx-4 cursor-pointer"
                     onClick={handleProgressClick1}
                 >
                     <div
@@ -172,21 +185,34 @@ export const MusicPlayer = () => {
                         height={isExpanded ? 55 : 50}
                         width={isExpanded ? 55 : 50}
                         alt="Song"
-                        className={cn("rounded-full duration-[3000ms] transition", isPlaying && "animate-spin", isExpanded && "animate-none rounded-md")}
+                        className={cn("rounded-full transition", isPlaying && "animate-rotate", isExpanded && "animate-rotate2 rounded-md")}
                     />
                     <div
                         onClick={setExpanded}
-                        className={cn("ml-3 w-[50%] flex flex-col gap-0.5", title.className, isExpanded && "w-full")}
+                        className={cn("ml-3 w-[50%] flex flex-col", title.className, isExpanded && "w-full")}
                     >
-                        <p className="truncate text-sm">
+                        <p className="truncate text-sm animate-slidein opacity-0 [--slidein-delay:100ms]">
                             {song.title}
                         </p>
-                        <p className={cn("hidden truncate text-xs text-muted-foreground transition", isExpanded && "flex")}>
-                            {song.album}
-                        </p>
-                        <p className="truncate text-xs text-muted-foreground/80">
-                            {song.artist}
-                        </p>
+                        {isExpanded ? (
+                            <>
+                                <p className={cn("hidden truncate text-xs text-muted-foreground transition", isExpanded && "flex")}>
+                                    {song.album}
+                                </p>
+                                <p className="truncate text-xs text-muted-foreground/80">
+                                    {song.artist}
+                                </p> 
+                            </>
+                        ) : (
+                            <div className="relative flex flex-col items-start justify-start text-xs text-muted-foreground h-5">
+                                <p className="absolute animate-slideInFadeOut21 truncate w-[99%]">
+                                    {song.album}
+                                </p>
+                                <p className={cn("absolute animate-slideInFadeOut22 truncate w-[99%]", !show && "opacity-0")}>
+                                    {song.artist}
+                                </p>
+                            </div>
+                        )}
                     </div>
                     <div className={cn("flex items-center justify-center gap-2 ml-auto", isExpanded && "hidden")}>
                         <ChevronLeft
@@ -239,4 +265,4 @@ export const MusicPlayer = () => {
             </div>
         </div>
     );
-}
+};

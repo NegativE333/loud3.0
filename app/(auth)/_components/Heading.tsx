@@ -1,12 +1,11 @@
 "use client";
 
-import { Nunito, Manrope, Mulish } from "next/font/google";
+import { Nunito, Manrope } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 const title = Nunito({ subsets: ["latin"] });
 const subtitle = Manrope({ subsets: ["latin"] });
-const content = Mulish({ subsets: ["latin"] });
 
 export const Heading = () => {
     const [show, setShow] = useState(false);

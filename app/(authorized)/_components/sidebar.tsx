@@ -7,21 +7,25 @@ import { SidebarOptions } from "./sidebar-options";
 import {useMedia} from 'use-media';
 import Link from "next/link";
 import { SearchBar } from "./search-bar";
+import { Nunito } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const title = Nunito({ subsets: ["latin"] });
 
 export const Sidebar = () => {
     const isMd = useMedia({ maxWidth: "767px" });
     return (
-        <div className="h-[98%] w-80 bg-white bg-opacity-30 rounded-sm p-4 relative lg:fixed">
+        <div className="h-[98%] w-80 bg-white bg-opacity-30 rounded-sm px-4 py-2.5 fixed">
             <div className="flex items-center w-full">
                 <Link 
                     href={"/"}
-                    className="text-3xl font-semibold text-gray-800/90"
+                    className={cn("text-4xl font-semibold text-cyan-800/90", title.className)}
                 >
                     loud
                 </Link>
             </div>
             <Separator
-                className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-2"
+                className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full mb-2 mt-1"
             />
             <div className="my-3">
                 <SearchBar />
@@ -53,11 +57,11 @@ export const Sidebar = () => {
                 />
             </div>
             {!isMd && (
-                <div className="absolute bottom-28 w-full left-0">
+                <div className="w-full left-0 mt-2">
                     <MusicPlayer />
                 </div>
             )}
-            <div className="absolute bottom-4 flex flex-col w-[90%]">
+            <div className="flex flex-col mt-4">
                 <UserActionsBtn />
             </div>
         </div>
