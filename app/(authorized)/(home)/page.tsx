@@ -13,6 +13,7 @@ const getSongs = async () => {
     "currentSlug": slug.current,
     cover,
     audioLink,
+    lrc,
     audioDur
   }`;
 

@@ -2,7 +2,7 @@
 
 import { Separator } from "@/components/ui/separator";
 import { urlFor } from "@/lib/sanity";
-import { cn, formatTime } from "@/lib/utils";
+import { cn, formatTime, parseLRC } from "@/lib/utils";
 import { useSong } from "@/store/use-song";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -11,6 +11,12 @@ import { useEffect, useState, useRef } from "react";
 import { useAudio } from 'react-use';
 import { Manrope, Poppins } from "next/font/google";
 import { useExpand } from "@/store/use-expand";
+import LiveLyrics from "./live-lyrics";
+
+type LyricLine = {
+    time: number;
+    text: string;
+};
 
 const subtitle = Manrope({ subsets: ["latin"] });
 const title = Poppins({ subsets: ['latin'], weight: ['500'] });
@@ -20,6 +26,7 @@ export const MusicPlayer = () => {
     const { isExpanded, setExpanded } = useExpand();
     const { data } = useSession();
     const [audioUrl, setAudioUrl] = useState("/audio/coming_soon.mp3");
+    const [lrc, setLrc] = useState<LyricLine[]>();
     const progressBarRef1 = useRef<HTMLDivElement>(null);
     const progressBarRef2 = useRef<HTMLDivElement>(null);
 
@@ -27,7 +34,6 @@ export const MusicPlayer = () => {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        console.log(isExpanded);
         if (song && !isExpanded) {
             timeoutRef.current = setTimeout(() => {
                 setShow(true);
@@ -53,6 +59,10 @@ export const MusicPlayer = () => {
                 const url = `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${id}.${format}`;
                 setAudioUrl(url);
             }
+            setLrc([]);
+        }
+        if(song?.lrc){
+            setLrc(parseLRC(song.lrc));
         }
     }, [song]);
 
@@ -174,7 +184,7 @@ export const MusicPlayer = () => {
                 </div>
             </div>
             <div
-                className={cn("h-full w-[96%] bg-white bg-opacity-95 rounded-full px-1 py-1 z-20 mx-2 md:hidden transition", isExpanded && "rounded-2xl h-[130px] px-3 py-2")}
+                className={cn("h-full w-[96%] bg-white bg-opacity-95 rounded-full px-1 py-1 z-20 mx-2 md:hidden transition", isExpanded && "rounded-2xl h-[160px] px-3 py-2")}
             >
                 <div
                     className={("flex items-center")}
@@ -236,18 +246,29 @@ export const MusicPlayer = () => {
                         />
                     </div>
                 </div>
-                <div className={cn("hidden mb-1.5 mt-3 text-xs w-full justify-between items-end text-muted-foreground pl-0.5", isExpanded && "flex")}>
-                    <p>{formatTime(state.time)}</p>
-                    <div className="flex items-center gap-3 pb-3 text-cyan-800/80">
-                        <ChevronLeft onClick={playPrevSong} />
-                        {isPlaying ? (
-                            <Pause onClick={togglePause}/>
-                        ) : (
-                            <Play onClick={togglePause}/>
+                <div className={cn("hidden mb-1 mt-2 text-xs w-full justify-center items-center text-muted-foreground", isExpanded && "flex flex-col")}>
+                    <div className="w-[98%] flex items-center justify-center text-[15px] text-cyan-900/80 h-6">
+                        {lrc && lrc?.length > 0 ? (
+                            <LiveLyrics lyrics={lrc} currentTime={state.time}/>
+                        ) : ( 
+                            <p>
+                                Sorry, no lyrics found
+                            </p>
                         )}
-                        <ChevronRight onClick={playNextSong}/>
                     </div>
-                    <p>{formatTime(state.duration)}</p>
+                    <div className="flex justify-between items-end w-full mt-3">
+                        <p>{formatTime(state.time)}</p>
+                        <div className="flex items-center gap-3 pb-3 text-cyan-800/80">
+                            <ChevronLeft onClick={playPrevSong} />
+                            {isPlaying ? (
+                                <Pause onClick={togglePause}/>
+                            ) : (
+                                <Play onClick={togglePause}/>
+                            )}
+                            <ChevronRight onClick={playNextSong}/>
+                        </div>
+                        <p>{formatTime(state.duration)}</p>
+                    </div>
                 </div>
                 <div
                     ref={progressBarRef2}

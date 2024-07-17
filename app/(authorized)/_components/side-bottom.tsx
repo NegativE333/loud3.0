@@ -18,7 +18,7 @@ export const SideBottom = () => {
                 </div>
             )}
             {isMd && (
-                <div className={cn("w-full h-16 absolute bottom-0.5 z-20", isExpanded && "bottom-[72px]")}>
+                <div className={cn("w-full h-16 absolute bottom-0.5 z-20", isExpanded && "bottom-[100px]")}>
                     <MusicPlayer />
                 </div>
             )}

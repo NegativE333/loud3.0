@@ -1,3 +1,4 @@
+import { TbBackground } from "react-icons/tb"
 import type { Config } from "tailwindcss"
 
 const config = {
@@ -105,7 +106,7 @@ const config = {
           to: {
             transform: "rotate(0deg)"
           }
-        }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -116,7 +117,7 @@ const config = {
         "slideInFadeOut21": 'slideInFadeOut 6s ease infinite',
         "slideInFadeOut22": 'slideInFadeOut 6s ease infinite 3s',
         "rotate": "rotate 2s linear infinite",
-        "rotate2": "rotate2 2s linear infinite"
+        "rotate2": "rotate2 2s linear infinite",
       },
     },
   },

@@ -5,6 +5,7 @@ export type songsData = {
     category: string;
     currentSlug: string;
     cover: any;
+    lrc: string;
     audioLink?: any;
     audioDur?: number;
 }
