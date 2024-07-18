@@ -110,6 +110,8 @@ export const MusicPlayer = () => {
 
     const progress = (state.time / state.duration) * 100 || 0;
 
+    console.log(audioUrl);
+
     return (
         <div>
             <div className="md:flex flex-col items-center justify-center gap-2 w-full relative hidden h-[15rem]">
@@ -153,16 +155,27 @@ export const MusicPlayer = () => {
                         )}
                     </div>
                 </div>
-                <div className={cn("flex flex-col items-center justify-center gap-0.5 text-center", subtitle.className)}>
+                <div className={cn("flex flex-col items-center justify-center gap-0.5 text-center w-full", subtitle.className)}>
                     <p className="font-semibold text-gray-900 truncate">
                         {song.title}
                     </p>
-                    <p className="w-[100%] line-clamp-1 text-gray-800">
-                        {song.album}
-                    </p>
-                    <p className="w-[100%] line-clamp-1 text-gray-700">
-                        {song.artist}
-                    </p>
+                    <div className="relative w-[100%]">
+                        <p className="absolute w-[100%] line-clamp-1 text-gray-800 animate-slideInFadeOut21">
+                            {song.album}
+                        </p>
+                        <p className={cn("w-[100%] line-clamp-1 text-gray-700 animate-slideInFadeOut22", !show && "opacity-0")}>
+                            {song.artist}
+                        </p>
+                    </div>
+                </div>
+                <div className="w-[98%] flex items-center justify-center text-[15px] text-black/80 mt-3 mb-1">
+                {lrc && lrc?.length > 0 ? (
+                            <LiveLyrics lyrics={lrc} currentTime={state.time}/>
+                        ) : ( 
+                            <p>
+                                Sorry, no lyrics found
+                            </p>
+                        )}
                 </div>
                 <div
                     ref={progressBarRef1}

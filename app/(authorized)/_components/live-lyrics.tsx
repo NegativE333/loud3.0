@@ -16,7 +16,7 @@ const LiveLyrics: React.FC<LiveLyricsProps> = ({ lyrics, currentTime }) => {
   const [currentLine, setCurrentLine] = useState<string>('');
 
   useEffect(() => {
-    const current = lyrics.find(line => line.time+1 >= currentTime);
+    const current = lyrics.find(line => line.time+1.1 >= currentTime);
     if (current) {
       setCurrentLine(current.text);
     }
