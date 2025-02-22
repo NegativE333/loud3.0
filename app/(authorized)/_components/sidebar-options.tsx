@@ -24,7 +24,9 @@ export const SidebarOptions = ({
 
     return (
         <Button
-            className={cn("w-fit flex items-center gap-2 text-muted-foreground transition hover:text-cyan-900/80 text-xl hover:bg-transparent bg-transparent border-none outline-none hover:border-none hover:outline-none focus:border-none focus:outline-none", isActive && "text-cyan-900/90 outline-none border-none", font.className)}
+            className={cn("w-fit flex items-center gap-2 transition hover:bg-transparent bg-transparent border-none outline-none hover:border-none hover:outline-none focus:border-none focus:outline-none",
+                "text-slate-400 hover:text-blue-200",
+                isActive && "text-blue-100", font.className)}
             onClick={() => router.push(path)}
         >
             {path === '/favourite' ? (

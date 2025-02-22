@@ -15,17 +15,17 @@ const title = Nunito({ subsets: ["latin"] });
 export const Sidebar = () => {
     const isMd = useMedia({ maxWidth: "767px" });
     return (
-        <div className="h-[98%] w-80 bg-white bg-opacity-30 rounded-sm px-4 py-2.5 fixed">
+        <div className="h-[98%] w-80 bg-[#020617]/40 rounded-sm px-4 py-2.5 fixed flex flex-col">
             <div className="flex items-center w-full">
                 <Link 
                     href={"/"}
-                    className={cn("text-4xl font-semibold text-cyan-800/90", title.className)}
+                    className={cn("text-4xl font-semibold text-blue-50", title.className)}
                 >
                     loud
                 </Link>
             </div>
             <Separator
-                className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full mb-2 mt-1"
+                className="bg-slate-600/20 h-0.5 rounded-full mb-2 mt-1"
             />
             <div className="my-3">
                 <SearchBar />
@@ -57,13 +57,13 @@ export const Sidebar = () => {
                 />
             </div>
             {!isMd && (
-                <div className="w-full left-0 mt-2">
+                <div className="w-full left-0 mt-auto">
                     <MusicPlayer />
                 </div>
             )}
-            <div className="flex flex-col mt-4">
+            {/* <div className="flex flex-col mt-4">
                 <UserActionsBtn />
-            </div>
+            </div> */}
         </div>
     )
 }

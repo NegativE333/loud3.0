@@ -10,7 +10,7 @@ const AuthorizedLayout = ({
     children
 }: Props) => {
     return(
-        <div className="h-full bg-gradient-to-bl from-gray-900 to-cyan-200/90 relative flex flex-col md:flex-row gap-4 select-none">
+        <div className="h-full bg-gradient-to-bl from-[#020617] to-[#1E293B]/95 relative flex flex-col md:flex-row gap-4 select-none">
             <SideBottom />
             <div className="md:hidden fixed w-full h-12 z-30">
                 <Navbar />
