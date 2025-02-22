@@ -15,7 +15,7 @@ const AuthorizedLayout = ({
             <div className="md:hidden fixed w-full h-12 z-30">
                 <Navbar />
             </div>
-            <ScrollArea className="h-full w-full flex items-center justify-center px-6 md:ml-8 md:pr-12 ml-0">
+            <ScrollArea className="h-full w-full flex items-center justify-center px-6">
                 <div className="mt-12 md:m-6 lg:m-8">
                     {children}
                 </div>
