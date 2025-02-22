@@ -111,7 +111,7 @@ export const MusicPlayer = () => {
     const progress = (state.time / state.duration) * 100 || 0;
 
     return (
-        <div className="bg-white/5 rounded-md pb-4">
+        <div className="bg-white/5 rounded-md pb-5">
             <div className="md:flex flex-col items-center justify-center gap-2 w-full relative hidden h-[15rem]">
                 <div
                     className="absolute top-[20%] left-[15%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
