@@ -111,7 +111,7 @@ export const SongsList = ({
         : data;
 
     return (
-        <div className={cn("lg:ml-8 pb-4 md:pb-0", song && "pb-20", isExpanded && "pb-36")}>
+        <div className={cn("pb-4 md:pb-0", song && "pb-20", isExpanded && "pb-36")}>
             <h1
                 className={cn("text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-white/70 to-white inline-block text-transparent bg-clip-text", heading.className, search.length > 0 && "text-2xl")}
             >
@@ -125,7 +125,7 @@ export const SongsList = ({
                     </p>
                 )}
             </h1>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-8 mt-4 md:mt-8 w-fit">
+            <div className="flex flex-wrap gap-4 md:gap-6 mt-4 md:mt-8 w-fit">
                 {filteredData.map((d) => {
                     const isFavourite = userFavourites?.includes(d.currentSlug);
                     return (
