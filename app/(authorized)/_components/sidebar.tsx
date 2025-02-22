@@ -15,7 +15,7 @@ const title = Nunito({ subsets: ["latin"] });
 export const Sidebar = () => {
     const isMd = useMedia({ maxWidth: "767px" });
     return (
-        <div className="h-[98%] w-80 bg-[#020617]/40 rounded-sm px-4 py-2.5 fixed">
+        <div className="h-[98%] w-80 bg-[#020617]/40 rounded-sm px-4 py-2.5 fixed flex flex-col">
             <div className="flex items-center w-full">
                 <Link 
                     href={"/"}
@@ -57,13 +57,13 @@ export const Sidebar = () => {
                 />
             </div>
             {!isMd && (
-                <div className="w-full left-0 mt-2">
+                <div className="w-full left-0 mt-auto">
                     <MusicPlayer />
                 </div>
             )}
-            <div className="flex flex-col mt-4">
+            {/* <div className="flex flex-col mt-4">
                 <UserActionsBtn />
-            </div>
+            </div> */}
         </div>
     )
 }

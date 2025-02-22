@@ -110,27 +110,22 @@ export const MusicPlayer = () => {
 
     const progress = (state.time / state.duration) * 100 || 0;
 
-    console.log(audioUrl);
-
     return (
-        <div>
+        <div className="bg-white/5 rounded-md pb-4">
             <div className="md:flex flex-col items-center justify-center gap-2 w-full relative hidden h-[15rem]">
-                <Separator
-                    className="bg-gray-700 bg-opacity-20 h-0.5 rounded-full my-2"
-                />
                 <div
-                    className="absolute top-[30%] left-[15%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
+                    className="absolute top-[20%] left-[15%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
                 >
                     <ChevronLeft
-                        className=""
+                        className="size-6 text-blue-200 hover:text-blue-50 transition-colors cursor-pointer"
                         onClick={playPrevSong}
                     />
                 </div>
                 <div
-                    className="absolute top-[30%] right-[15%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
+                    className="absolute top-[20%] right-[15%] cursor-pointer rounded-full bg-white flex items-center bg-opacity-15 hover:bg-opacity-35 shadow-md"
                 >
                     <ChevronRight
-                        className=""
+                        className="size-6 text-blue-200 hover:text-blue-50 transition-colors cursor-pointer"
                         onClick={playNextSong}
                     />
                 </div>
@@ -147,28 +142,28 @@ export const MusicPlayer = () => {
                         unoptimized
                     />
                     <div className="absolute bg-black/50 w-full text-center text-[13px] py-1 rounded-b hidden group-hover:block transition rounded-sm h-[100%] top-0" />
-                    <div className="absolute hidden group-hover:block bg-white/80 p-1 rounded-full transition z-10 top-[30%] left-[30%] cursor-pointer">
+                    <div className="absolute hidden group-hover:block  p-1 rounded-full transition z-10 top-[30%] left-[30%] cursor-pointer">
                         {isPlaying ? (
-                            <Pause className="size-7" />
+                            <Pause className="size-7 text-blue-200 hover:text-blue-50 transition-colors cursor-pointer" />
                         ) : (
-                            <Play className="size-7" />
+                            <Play className="size-7 text-blue-200 hover:text-blue-50 transition-colors cursor-pointer" />
                         )}
                     </div>
                 </div>
                 <div className={cn("flex flex-col items-center justify-center gap-0.5 text-center w-full", subtitle.className)}>
-                    <p className="font-semibold text-gray-900 truncate">
+                    <p className="font-semibold text-blue-50 truncate">
                         {song.title}
                     </p>
                     <div className="relative w-[100%]">
-                        <p className="absolute w-[100%] line-clamp-1 text-gray-800 animate-slideInFadeOut21">
+                        <p className="absolute w-[100%] line-clamp-1 text-slate-300 animate-slideInFadeOut21">
                             {song.album}
                         </p>
-                        <p className={cn("w-[100%] line-clamp-1 text-gray-700 animate-slideInFadeOut22", !show && "opacity-0")}>
+                        <p className={cn("w-[100%] line-clamp-1 text-slate-400 animate-slideInFadeOut22", !show && "opacity-0")}>
                             {song.artist}
                         </p>
                     </div>
                 </div>
-                <div className="w-[98%] flex items-center justify-center text-[15px] text-black/80 mt-3 mb-1">
+                <div className="w-[98%] flex items-center justify-center text-[15px] text-slate-300 mt-3 mb-1">
                 {lrc && lrc?.length > 0 ? (
                             <LiveLyrics lyrics={lrc} currentTime={state.time}/>
                         ) : ( 
@@ -179,14 +174,14 @@ export const MusicPlayer = () => {
                 </div>
                 <div
                     ref={progressBarRef1}
-                    className="relative w-full h-1 hover:bg-muted-foreground rounded-full mt-2 mx-4 cursor-pointer"
+                    className="relative w-[95%] h-1 bg-muted-foreground rounded-full mt-2 mx-4 cursor-pointer"
                     onClick={handleProgressClick1}
                 >
                     <div
-                        className="absolute top-0 left-0 h-full bg-cyan-900 rounded-full"
+                        className="absolute top-0 left-0 h-full bg-white/70 rounded-full"
                         style={{ width: `${progress}%` }}
                     />
-                    <div className="mt-2 text-sm flex w-full">
+                    <div className="mt-2 text-sm flex w-full text-slate-400">
                         <p>
                             {state && formatTime(state.time)}
                         </p>
