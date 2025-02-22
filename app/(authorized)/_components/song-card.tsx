@@ -33,7 +33,8 @@ export const SongCard = ({
     return (
         <div
             onClick={handleCardClick}
-            className={cn("bg-white bg-opacity-20 hover:bg-opacity-30 p-2 rounded-sm w-40 h-fit group transition shadow-lg", isPlaying && "bg-opacity-60 hover:bg-opacity-60")}
+            className={cn("bg-white/5 hover:bg-white/10 p-2 rounded-sm w-40 h-fit group transition shadow-lg",
+                isPlaying && "bg-white/15 hover:bg-white/15")}
         >
             <div className="flex items-center justify-center relative">
                 <Image
@@ -62,11 +63,11 @@ export const SongCard = ({
                     <Music2 />
                 </div>
             </div>
-            <div className={cn("flex flex-col text-sm w-full h-full text-center mt-1 capitalize gap-0.5 text-cyan-900/90", title.className)}>
-                <h1 className="truncate">
+            <div className={cn("flex flex-col w-full h-full text-center mt-1 capitalize gap-0.5", title.className)}>
+                <h1 className="truncate text-gray-100 text-xs">
                     {data.title}
                 </h1>
-                <h2 className="text-xs truncate">
+                <h2 className="text-[10px] truncate text-gray-400">
                     {data.artist}
                 </h2>
             </div>
