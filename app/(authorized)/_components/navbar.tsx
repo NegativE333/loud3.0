@@ -23,17 +23,17 @@ export const Navbar = () => {
     }
     
     return(
-        <div className="w-full h-full bg-white/90 rounded-b-md flex items-center px-6">
+        <div className="w-full h-full bg-slate-950/40 backdrop-blur-sm border-b border-slate-800/40 flex items-center px-6">
             <div 
                 onClick={handleClick}
-                className={cn("font-bold text-3xl text-cyan-900", title.className)}
+                className={cn("font-bold text-3xl bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent", title.className)}
             >
                 loud
             </div>
             <div className="flex gap-3 items-center justify-center ml-auto">
                 <Popover>
                     <PopoverTrigger>
-                        <Search className="size-6 text-cyan-800/80"/>
+                        <Search className="size-6 text-slate-200 hover:text-cyan-300 transition"/>
                     </PopoverTrigger>
                     <PopoverContent 
                         className="w-64 p-0 shadow-lg"
@@ -44,7 +44,7 @@ export const Navbar = () => {
                     </PopoverContent>
                 </Popover>
                 <PlayListSheet>
-                    <TbPlaylist className="text-2xl text-muted-foreground"/>
+                    <TbPlaylist className="text-2xl text-slate-200 hover:text-cyan-300 transition"/>
                 </PlayListSheet>
             </div>
         </div>
