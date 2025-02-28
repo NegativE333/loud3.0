@@ -116,7 +116,7 @@ const config = {
         "slideInFadeOut2": 'slideInFadeOut 10s ease infinite 5s',
         "slideInFadeOut21": 'slideInFadeOut 6s ease infinite',
         "slideInFadeOut22": 'slideInFadeOut 6s ease infinite 3s',
-        "rotate": "rotate 2s linear infinite",
+        "rotate": "rotate 3s linear infinite",
         "rotate2": "rotate2 2s linear infinite",
       },
     },
