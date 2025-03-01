@@ -6,7 +6,7 @@ export const revalidate = 30;
 
 const getSongs = async () => {
   const query = `
-  *[_type == 'songs'] {
+  *[_type == 'songs' && feature == true] {
     title,
     artist,
     album,
