@@ -6,10 +6,7 @@ import { Hind } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { useSong } from "@/store/use-song";
 import { useEffect, useState, useTransition } from "react";
-import {
-  AudioLines,
-  Loader2,
-} from "lucide-react";
+import { AudioLines, Loader2 } from "lucide-react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
@@ -192,10 +189,10 @@ export const SongsList = ({ data, title }: Props) => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
               <blockquote className="relative px-6 py-4">
                 <span className="absolute top-0 left-0 text-2xl text-white/20">
-                  "
+                  &ldquo;
                 </span>
                 <span className="absolute bottom-0 right-0 text-2xl text-white/20">
-                  "
+                  &rdquo;
                 </span>
                 <p className="text-base md:text-lg text-white/80 font-medium leading-relaxed text-center">
                   {getRandomMusicalQuote()}
