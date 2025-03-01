@@ -43,7 +43,7 @@ export const Navbar = () => {
             <Search className="size-6 text-slate-200 hover:text-cyan-300 transition" />
           </PopoverTrigger>
           <PopoverContent
-            className="w-64 p-0 shadow-lg"
+            className="w-64 p-0 border-0 bg-transparent shadow-none"
             sideOffset={14}
             align="end"
           >
